@@ -3,10 +3,17 @@ import thread
 import time
 from pygame.locals import *
 
+RES_X = 800
+RES_Y = 600
+BORDER_THRESHOLD = 70
+SAMPLING_RATE = 0.001
+DEFAULT_POS_X = 100
+DEFAULT_POS_Y = 100
+
 class Player:
 	def __init__(self):
-		self.x = 100
-		self.y = 100
+		self.x = DEFAULT_POS_X
+		self.y = DEFAULT_POS_Y
 		try:
 			thread.start_new_thread(self.act,())
 		except Exception as e:
@@ -18,7 +25,7 @@ class Player:
 
 	def act(self):
 		while 1:
-			time.sleep(0.001)
+			time.sleep(SAMPLING_RATE)
 			self.handleGravity()
 			self.handleControls()
 
@@ -31,16 +38,11 @@ class Player:
 			self.move(2)
 
 	def move(self,quantity):
-		if (quantity > 0 and self.y > 0) or (quantity < 0 and self.y < 400):
+		if (quantity > 0 and self.y > 0) or (quantity < 0 and self.y < RES_Y - BORDER_THRESHOLD):
 			self.y = self.y - quantity
 
-
-
-
-
 pygame.init()
-width, height = 640, 480
-screen = pygame.display.set_mode((width, height))
+screen = pygame.display.set_mode((RES_X, RES_Y))
 player = pygame.image.load("gold-ball.png")
 p = Player()
 
