@@ -9,7 +9,7 @@ RES_X = 500
 RES_Y = 500
 BORDER_Y_TOP = 5
 BORDER_Y_BOTTOM = RES_Y - 70
-SAMPLING_RATE = 0.02
+SAMPLING_RATE = 0.01
 
 def handleQuit():
 	for event in pygame.event.get():
@@ -20,27 +20,17 @@ def handleQuit():
 
 def draw():
 	screen.fill(0)
-	screen.blit(player, (p.x,p.y))	
+	for player in players:
+		player.draw()
 	pygame.display.flip()
 
 pygame.init()
 screen = pygame.display.set_mode((RES_X, RES_Y))
-player = pygame.image.load("gold-ball.png")
-p = Player(pygame,5,RES_Y - 70)
+players = []
+players.append(Player(pygame,screen,"gold-ball.png",5,RES_Y - 70))
 
 CyclicThread(handleQuit,SAMPLING_RATE)	
 
 while 1:
 	draw()
 	time.sleep(SAMPLING_RATE)
-
-
-
-
-	
-
-
-
-
-
-
