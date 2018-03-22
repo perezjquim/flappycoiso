@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from util import *
+from actor import *
 
 SAMPLING_RATE = 0.01
 DEFAULT_POS_X = 100
@@ -8,11 +9,9 @@ DEFAULT_POS_Y = 100
 UP_STRENGTH = 20
 GRAVITY = 10
 
-class Player:
+class Player(Actor):
 	def __init__(self,pygame,screen,image_name,TOP_BORDER,BOTTOM_BORDER):
-		self.pygame = pygame
-		self.image =  pygame.image.load(image_name)
-		self.screen = screen
+		Actor.__init__(self,pygame,screen,image_name)
 		self.x = DEFAULT_POS_X
 		self.y = DEFAULT_POS_Y
 		self.TOP_BORDER = TOP_BORDER
@@ -22,9 +21,6 @@ class Player:
 	def act(self):		
 		self.handleGravity()
 		self.handleControls()
-
-	def draw(self):
-		self.screen.blit(self.image,(self.x,self.y))
 
 	def handleGravity(self):
 		self.move(-GRAVITY)
