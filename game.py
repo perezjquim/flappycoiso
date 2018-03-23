@@ -20,14 +20,16 @@ def handleQuit():
 
 def draw():
 	screen.fill(0)
-	for player in players:
-		player.draw()
+	for actor in actors:
+		actor.draw()
 	pygame.display.flip()
 
 pygame.init()
 screen = pygame.display.set_mode((RES_X, RES_Y))
-players = []
-players.append(Player(pygame,screen,"gold-ball.png",5,RES_Y - 70))
+
+player = Player(pygame,screen,"gold-ball.png",5,RES_Y- 70)
+actors = []
+actors.append(player)
 
 CyclicThread(handleQuit,SAMPLING_RATE)	
 
