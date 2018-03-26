@@ -21,16 +21,18 @@ class Game:
 		self.player = Player(pygame,self.screen,PLAYER_SKIN,RES_X,RES_Y)
 		self.obstacles = []
 		self.running = True
+		self.score = 0
 		self.quitHandler = CyclicThread(self.handleQuit,SAMPLING_RATE)	
 
 		while self.running == True:
 			self.draw()		
 			self.act()
 			time.sleep(SAMPLING_RATE)
+			self.score = self.score + 0.1
 
 		self.quitHandler.stop()
 		pygame.quit()
-		EndMenu()
+		EndMenu(int(self.score))
 
 	def handleQuit(self):
 		for event in pygame.event.get():

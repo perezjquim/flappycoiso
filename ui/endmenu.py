@@ -3,10 +3,18 @@ import game
 
 class EndMenu(Application):
 
+	def __init__(self,score):
+		self.score = score
+		Application.__init__(self)
+
 	def createWidgets(self):
 		self.lblUser = Label(self)
 		self.lblUser["text"] = "! GAMEOVER !"
 		self.lblUser.pack(padx=self.get_padding(),pady=self.get_padding())
+
+		self.lblScore = Label(self)
+		self.lblScore["text"] = "Score: " + str(self.score)
+		self.lblScore.pack(padx=self.get_padding(),pady=self.get_padding())		
 
 		self.btnReplay = Button(self)
 		self.btnReplay["text"] = "REPLAY"
