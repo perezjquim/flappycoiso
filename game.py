@@ -43,7 +43,8 @@ class Game:
 
 	def drawActors(self):
 		for o in self.obstacles:
-			o.draw()
+			if(o.x > 0):
+				o.draw()
 		self.player.draw()
 
 	def draw(self):
