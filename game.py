@@ -21,14 +21,15 @@ def handleQuit():
 	time.sleep(SAMPLING_RATE)
 
 def drawActors():
-	for actor in actors:
-		actor.draw()
+	for o in obstacles:
+		o.draw()
+	player.draw()
 
 def draw():
 	screen.fill(0)
 	drawActors()
-	for actor in actors:
-		if isinstance(actor,Obstacle) and abs(actor.x-player.x) < 20 and abs(actor.y-player.y) < 20:
+	for o in obstacles:
+		if abs(o.x-player.x) < player.image.get_width()*0.5 and abs(o.y-player.y) < player.image.get_height()*0.5:
 			stopGame()
 			stopActors()
 			return
@@ -37,11 +38,12 @@ def draw():
 def act():
 	if randint(0,20) == 0:
 		o = Obstacle(pygame,screen,OBSTACLE_SKIN,RES_X,RES_Y)	
-		actors.append(o)
+		obstacles.append(o)
 
 def stopActors():
-	for actor in actors:
-		actor.thread.stop()
+	for o in obstacles:
+		o.thread.stop()
+	player.thread.stop()
 
 def stopGame():
 	global running
@@ -51,16 +53,15 @@ pygame.init()
 screen = pygame.display.set_mode((RES_X, RES_Y))
 
 player = Player(pygame,screen,PLAYER_SKIN,5,RES_Y- 70)
-actors = []
-actors.append(player)
+obstacles = []
 
 CyclicThread(handleQuit,SAMPLING_RATE)	
 
 while running == True:
 	draw()		
-	act()	
+	act()
 	time.sleep(SAMPLING_RATE)
 
 while 1:
-	pass
+	time.sleep(9999999)
 
