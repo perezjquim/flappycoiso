@@ -2,18 +2,16 @@ from etc.util import *
 from actors.actor import *
 
 SAMPLING_RATE = 0.01
-DEFAULT_POS_X = 100
-DEFAULT_POS_Y = 100
 UP_STRENGTH = 20
 GRAVITY = 10
 
 class Player(Actor):
-	def __init__(self,pygame,screen,image_name,TOP_BORDER,BOTTOM_BORDER):
+	def __init__(self,pygame,screen,image_name,RES_X,RES_Y):
 		Actor.__init__(self,pygame,screen,image_name)
-		self.x = DEFAULT_POS_X
-		self.y = DEFAULT_POS_Y
-		self.TOP_BORDER = TOP_BORDER
-		self.BOTTOM_BORDER = BOTTOM_BORDER
+		self.x = RES_X/2
+		self.y = RES_Y/2
+		self.TOP_BORDER = 5
+		self.BOTTOM_BORDER = RES_Y - 70
 		self.thread = CyclicThread(self.act,SAMPLING_RATE)
 
 	def act(self):		
