@@ -12,7 +12,7 @@ class Obstacle(Actor):
 		Actor.__init__(self,pygame,screen,image_name)
 		self.x = RES_X - 50
 		self.y = randint(0,RES_Y)
-		CyclicThread(self.act,SAMPLING_RATE)
+		self.thread = CyclicThread(self.act,SAMPLING_RATE)
 
 	def act(self):		
 		self.handleGravity()

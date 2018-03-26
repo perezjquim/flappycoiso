@@ -16,7 +16,7 @@ class Player(Actor):
 		self.y = DEFAULT_POS_Y
 		self.TOP_BORDER = TOP_BORDER
 		self.BOTTOM_BORDER = BOTTOM_BORDER
-		CyclicThread(self.act,SAMPLING_RATE)
+		self.thread = CyclicThread(self.act,SAMPLING_RATE)
 
 	def act(self):		
 		self.handleGravity()

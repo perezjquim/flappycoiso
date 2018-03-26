@@ -12,6 +12,7 @@ RES_Y = 500
 BORDER_Y_TOP = 5
 BORDER_Y_BOTTOM = RES_Y - 70
 SAMPLING_RATE = 0.01
+running = True
 
 def handleQuit():
 	for event in pygame.event.get():
@@ -29,8 +30,9 @@ def draw():
 	drawActors()
 	for actor in actors:
 		if isinstance(actor,Obstacle) and abs(actor.x-player.x) < 20 and abs(actor.y-player.y) < 20:
-			global running
-			running = 0
+			stopGame()
+			stopActors()
+			return
 	pygame.display.flip()
 
 def act():
@@ -38,7 +40,13 @@ def act():
 		o = Obstacle(pygame,screen,"beeper.png",RES_X,RES_Y)	
 		actors.append(o)
 
-running = 1
+def stopActors():
+	for actor in actors:
+		actor.thread.stop()
+
+def stopGame():
+	global running
+	running = False
 
 pygame.init()
 screen = pygame.display.set_mode((RES_X, RES_Y))
@@ -49,11 +57,11 @@ actors.append(player)
 
 CyclicThread(handleQuit,SAMPLING_RATE)	
 
-while running == 1:
-	draw()
+while running == True:
+	draw()		
 	act()	
 	time.sleep(SAMPLING_RATE)
 
 while 1:
-	time.sleep(100)
+	pass
 
