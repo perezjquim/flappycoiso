@@ -4,4 +4,4 @@ main: exec
 exec:
 	@rm -f $(FILES-TO-CLEAN)
 	@echo 'Executing..'
-	@python game.py
+	@python main.py

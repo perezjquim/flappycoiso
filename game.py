@@ -2,6 +2,8 @@ from actors.player import *
 from actors.obstacle import *
 from etc.util import *
 from pygame.locals import *
+from ui.application import *
+from ui.mainmenu import *
 import pygame
 
 RES_X = 500
@@ -10,57 +12,56 @@ SAMPLING_RATE = 0.01
 OBSTACLE_SPAWN_RATE = 20
 PLAYER_SKIN = "images/gold-ball.png"
 OBSTACLE_SKIN = "images/beeper.png"
-running = True
 
-def handleQuit():
-	for event in pygame.event.get():
-		if event.type==pygame.QUIT:
-			pygame.quit()
-			exit(0)
-	time.sleep(SAMPLING_RATE)
+class Game:
+	def __init__(self):
+		pygame.init()
+		self.screen = pygame.display.set_mode((RES_X, RES_Y))
+		self.player = Player(pygame,self.screen,PLAYER_SKIN,RES_X,RES_Y)
+		self.obstacles = []
+		self.running = True
 
-def drawActors():
-	for o in obstacles:
-		o.draw()
-	player.draw()
+		CyclicThread(self.handleQuit,SAMPLING_RATE)	
 
-def draw():
-	screen.fill(0)
-	drawActors()
-	pygame.display.flip()
-	for o in obstacles:
-		if abs(o.x-player.x) < player.image.get_width()*0.5 - 20 and abs(o.y-player.y) < player.image.get_height()*0.5 - 20:	
-			stopGame()
-			stopActors()
-			return	
+		while self.running == True:
+			self.draw()		
+			self.act()
+			time.sleep(SAMPLING_RATE)
 
-def act():
-	if randint(0,OBSTACLE_SPAWN_RATE) == 0:
-		o = Obstacle(pygame,screen,OBSTACLE_SKIN,RES_X,RES_Y)	
-		obstacles.append(o)
+		while 1:
+			time.sleep(9999999)
 
-def stopActors():
-	for o in obstacles:
-		o.thread.stop()
-	player.thread.stop()
+	def handleQuit(self):
+		for event in pygame.event.get():
+			if event.type==pygame.QUIT:
+				pygame.quit()
+				exit(0)
+		time.sleep(SAMPLING_RATE)
 
-def stopGame():
-	global running
-	running = False
+	def drawActors(self):
+		for o in self.obstacles:
+			o.draw()
+		self.player.draw()
 
-pygame.init()
-screen = pygame.display.set_mode((RES_X, RES_Y))
+	def draw(self):
+		self.screen.fill(0)
+		self.drawActors()
+		pygame.display.flip()
+		for o in self.obstacles:
+			if abs(o.x-self.player.x) < self.player.image.get_width()*0.5 - 10 and abs(o.y-self.player.y) < self.player.image.get_height()*0.5 - 10:	
+				self.stopGame()
+				self.stopActors()
+				return	
 
-player = Player(pygame,screen,PLAYER_SKIN,RES_X,RES_Y)
-obstacles = []
+	def act(self):
+		if randint(0,OBSTACLE_SPAWN_RATE) == 0:
+			o = Obstacle(pygame,self.screen,OBSTACLE_SKIN,RES_X,RES_Y)	
+			self.obstacles.append(o)
 
-CyclicThread(handleQuit,SAMPLING_RATE)	
+	def stopActors(self):
+		for o in self.obstacles:
+			o.thread.stop()
+		self.player.thread.stop()
 
-while running == True:
-	draw()		
-	act()
-	time.sleep(SAMPLING_RATE)
-
-while 1:
-	time.sleep(9999999)
-
+	def stopGame(self):
+		self.running = False
