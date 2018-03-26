@@ -12,6 +12,8 @@ RES_Y = 500
 BORDER_Y_TOP = 5
 BORDER_Y_BOTTOM = RES_Y - 70
 SAMPLING_RATE = 0.01
+PLAYER_SKIN = "images/gold-ball.png"
+OBSTACLE_SKIN = "images/beeper.png"
 running = True
 
 def handleQuit():
@@ -37,7 +39,7 @@ def draw():
 
 def act():
 	if randint(0,20) == 0:
-		o = Obstacle(pygame,screen,"beeper.png",RES_X,RES_Y)	
+		o = Obstacle(pygame,screen,OBSTACLE_SKIN,RES_X,RES_Y)	
 		actors.append(o)
 
 def stopActors():
@@ -51,7 +53,7 @@ def stopGame():
 pygame.init()
 screen = pygame.display.set_mode((RES_X, RES_Y))
 
-player = Player(pygame,screen,"gold-ball.png",5,RES_Y- 70)
+player = Player(pygame,screen,PLAYER_SKIN,5,RES_Y- 70)
 actors = []
 actors.append(player)
 
