@@ -1,5 +1,5 @@
 from ui.application import *
-from game import *
+import game
 
 class MainMenu(Application):
 
@@ -15,4 +15,4 @@ class MainMenu(Application):
 
 	def playGame(self):
 		self.close()
-		Game()
+		game.Game()
