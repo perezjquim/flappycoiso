@@ -1,7 +1,7 @@
-from player import *
-from util import *
+from actors.player import *
+from actors.obstacle import *
+from etc.util import *
 from pygame.locals import *
-from obstacle import *
 from random import randint
 import pygame
 import time

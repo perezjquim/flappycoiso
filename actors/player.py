@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
-from util import *
-from actor import *
+from etc.util import *
+from actors.actor import *
 
 SAMPLING_RATE = 0.01
 DEFAULT_POS_X = 100

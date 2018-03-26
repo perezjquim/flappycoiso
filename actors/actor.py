@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from util import *
+from etc.util import *
 
 class Actor:
 	def __init__(self,pygame,screen,image_name):
