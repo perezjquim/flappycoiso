@@ -1,5 +1,3 @@
-import pygame
-from pygame.locals import *
 from etc.util import *
 from actors.actor import *
 from random import randint

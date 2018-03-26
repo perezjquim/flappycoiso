@@ -2,10 +2,7 @@ from actors.player import *
 from actors.obstacle import *
 from etc.util import *
 from pygame.locals import *
-from random import randint
 import pygame
-import time
-import threading
 
 RES_X = 500
 RES_Y = 500
