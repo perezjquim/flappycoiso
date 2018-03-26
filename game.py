@@ -29,13 +29,16 @@ def draw():
 	drawActors()
 	for actor in actors:
 		if isinstance(actor,Obstacle) and abs(actor.x-player.x) < 20 and abs(actor.y-player.y) < 20:
-			print "colide"
+			global running
+			running = 0
 	pygame.display.flip()
 
 def act():
 	if randint(0,20) == 0:
 		o = Obstacle(pygame,screen,"beeper.png",RES_X,RES_Y)	
 		actors.append(o)
+
+running = 1
 
 pygame.init()
 screen = pygame.display.set_mode((RES_X, RES_Y))
@@ -46,8 +49,11 @@ actors.append(player)
 
 CyclicThread(handleQuit,SAMPLING_RATE)	
 
-while 1:
+while running == 1:
 	draw()
 	act()	
 	time.sleep(SAMPLING_RATE)
+
+while 1:
+	time.sleep(100)
 
