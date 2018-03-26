@@ -4,6 +4,7 @@ from etc.util import *
 from pygame.locals import *
 from ui.application import *
 from ui.mainmenu import *
+from ui.endmenu import *
 import pygame
 
 RES_X = 500
@@ -20,16 +21,16 @@ class Game:
 		self.player = Player(pygame,self.screen,PLAYER_SKIN,RES_X,RES_Y)
 		self.obstacles = []
 		self.running = True
-
-		CyclicThread(self.handleQuit,SAMPLING_RATE)	
+		self.quitHandler = CyclicThread(self.handleQuit,SAMPLING_RATE)	
 
 		while self.running == True:
 			self.draw()		
 			self.act()
 			time.sleep(SAMPLING_RATE)
 
-		while 1:
-			time.sleep(9999999)
+		self.quitHandler.stop()
+		pygame.quit()
+		EndMenu()
 
 	def handleQuit(self):
 		for event in pygame.event.get():

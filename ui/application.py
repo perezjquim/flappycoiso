@@ -1,6 +1,6 @@
 from Tkinter import *
 
-PAD = 10
+PAD = 50
 
 class Application(Frame):
 
