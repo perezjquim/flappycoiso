@@ -1,7 +1,12 @@
-FILES-TO-CLEAN = $(shell find . -name "*.pyc")
+main: update repackage
 
-main: exec
-exec:
-	@rm -f $(FILES-TO-CLEAN)
-	@echo 'Executing..'
-	@python main.py
+update:
+	@cd flappycoiso > /dev/null && make clean > /dev/null && cd - > /dev/null
+	@echo "@Updating files...@"
+	@cp -R flappycoiso/* flappycoiso-deb/opt/flappycoiso/
+	@echo "@Files updated!@"
+
+repackage:
+	@echo "@Repackaging...@"
+	@dpkg-deb --build flappycoiso-deb flappycoiso.deb > /dev/null
+	@echo "@Repackaged!@"

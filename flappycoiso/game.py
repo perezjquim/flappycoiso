@@ -6,13 +6,14 @@ from ui.application import *
 from ui.mainmenu import *
 from ui.endmenu import *
 import pygame
+import os
 
 RES_X = 500
 RES_Y = 500
 SAMPLING_RATE = 0.01
 OBSTACLE_SPAWN_RATE = 20
-PLAYER_SKIN = "images/gold-ball.png"
-OBSTACLE_SKIN = "images/beeper.png"
+PLAYER_SKIN = os.path.dirname(__file__) + "/images/gold-ball.png"
+OBSTACLE_SKIN = os.path.dirname(__file__) + "/images/beeper.png"
 
 class Game:
 	def __init__(self):

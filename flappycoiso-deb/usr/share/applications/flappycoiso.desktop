@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Name=FlappyCoiso
+Exec=python /opt/flappycoiso/main.py
+Terminal=false
+Type=Application

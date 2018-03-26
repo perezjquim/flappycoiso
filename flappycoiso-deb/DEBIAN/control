@@ -1,0 +1,5 @@
+Package: flappycoiso
+Maintainer: perezjquim
+Architecture: all
+Version: 1.0
+Description: Basic game made in Python
