@@ -1,4 +1,7 @@
-main: update repackage
+main: clean update repackage
+
+clean:
+	@rm -rf flappycoiso-deb/opt/flappycoiso/*
 
 update:
 	@cd flappycoiso > /dev/null && make clean > /dev/null && cd - > /dev/null

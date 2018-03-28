@@ -12,12 +12,15 @@ RES_X = 500
 RES_Y = 500
 SAMPLING_RATE = 0.01
 OBSTACLE_SPAWN_RATE = 20
-PLAYER_SKIN = os.path.dirname(__file__) + "/images/gold-ball.png"
-OBSTACLE_SKIN = os.path.dirname(__file__) + "/images/beeper.png"
+PLAYER_SKIN = os.path.dirname(__file__) + "/images/player.png"
+OBSTACLE_SKIN = os.path.dirname(__file__) + "/images/obstacle.png"
+BG_SKIN = os.path.dirname(__file__) + "/images/bg.jpeg"
 
 class Game:
 	def __init__(self):
 		pygame.init()
+		self.image = pygame.image.load(BG_SKIN)
+		self.image = pygame.transform.scale(self.image,(RES_X,RES_Y))
 		self.screen = pygame.display.set_mode((RES_X, RES_Y))
 		self.player = Player(pygame,self.screen,PLAYER_SKIN,RES_X,RES_Y)
 		self.obstacles = []
@@ -50,6 +53,7 @@ class Game:
 
 	def draw(self):
 		self.screen.fill(0)
+		self.screen.blit(self.image,(0,0))
 		self.drawActors()
 		pygame.display.flip()
 		for o in self.obstacles:
