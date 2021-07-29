@@ -6,12 +6,12 @@ In terms of gameplay, all you have to do is avoid touching the obstacles (the re
 
 
 ## Screenshots
-<img src="http://imgur.com/GEx2GYul.png">
+<img src="https://imgur.com/GEx2GYul.png">
 
-<img src="http://imgur.com/3O11RW5l.png">
+<img src="https://imgur.com/3O11RW5l.png">
 
-<img src="http://imgur.com/RFXDkacl.png">
+<img src="https://imgur.com/RFXDkacl.png">
 
-<img src="http://imgur.com/ZUc9bxal.png">
+<img src="https://imgur.com/ZUc9bxal.png">
 
 ## <a href="https://github.com/perezjquim/flappycoiso/raw/master/flappycoiso.deb"> DOWNLOAD </a> (.deb)
